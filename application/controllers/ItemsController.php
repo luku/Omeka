@@ -246,20 +246,20 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             } else {
                 $this->render('batch-edit-all');
             }
-            return;
-        }
+        } else {
 
-        // Process only selected items.
-        $itemIds = $this->_getParam('items');
-        if (empty($itemIds)) {
-            $this->_helper->flashMessenger(__('You must choose some items to batch edit.'), 'error');
-            $this->_helper->redirector('browse', 'items');
-            return;
-        }
-
-        $this->view->assign(compact('itemIds'));
-        if ($delete) {
-            $this->render('batch-delete');
+            // Process only selected items.
+            $itemIds = $this->_getParam('items');
+            if (empty($itemIds)) {
+                $this->_helper->flashMessenger(__('You must choose some items to batch edit.'), 'error');
+                $this->_helper->redirector('browse', 'items');
+                return;
+            }
+    
+            $this->view->assign(compact('itemIds'));
+            if ($delete) {
+                $this->render('batch-delete');
+            }
         }
     }
 
